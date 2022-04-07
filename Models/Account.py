@@ -10,4 +10,6 @@ class Account(BaseModel):
     national : str 
     avatar : str 
     createAt : str
+    token: str
     role : str
+
