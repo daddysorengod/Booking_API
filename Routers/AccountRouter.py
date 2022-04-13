@@ -3,7 +3,7 @@ from Models.index import Account
 from DataAccess.index import AccountDA
 from fastapi.encoders import jsonable_encoder
 
-account_rt = APIRouter()
+account_rt = APIRouter(tags=["account"])
 
 @account_rt.get('/api/account')
 async def getAllAccount():
@@ -23,3 +23,7 @@ async def update(id:str, new_password:str = Form(...)):
 async def delete(id:str):
     new_account = await AccountDA.delete(id)
     return new_account
+
+@account_rt.get("/api/account/get-by-id/{id}")
+async def get_id(id:str):
+    return await AccountDA.get_user_by_id(id)
