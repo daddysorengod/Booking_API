@@ -1,3 +1,4 @@
+from typing import Optional
 from pydantic import BaseModel
 
 class Account(BaseModel):
@@ -5,11 +6,11 @@ class Account(BaseModel):
     password : str
     name : str
     email : str
-    sex : str
+    sex : Optional[str] = None
     address : str
     national : str 
-    avatar : str 
+    avatar : Optional[str] = None
     createAt : str
-    token: str
+    hotelId: Optional[str] = None
+    token: Optional[str] = None
     role : str
-

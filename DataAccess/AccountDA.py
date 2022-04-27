@@ -12,12 +12,6 @@ auth_jwt = AuthHandler()
 
 class AccountDA():
     
-    # def check_account(email:str, username:str ) -> bool:
-    #     x = col_accounts.find({"email":email})
-    #     y = col_accounts.find({"usernmae":username})
-    #     if x is None and y is None:
-    #         return True
-    #     else: return False 
     async def getAll(): 
         rs = []
         async for item in col_accounts.find():
@@ -34,7 +28,6 @@ class AccountDA():
         else:
             check = True
             
-            
         if check == True:
             try: 
                 account.password = auth_jwt.get_password_hash(account.password)
@@ -42,9 +35,9 @@ class AccountDA():
                 account.token = ""
                 new_account =  await col_accounts.insert_one(account.dict())
                 await col_accounts.find_one({"_id":new_account.inserted_id})
-                return 1
+                return {"success" :  1}
             except:   
-                return -1
+                return {"success" :  -1}
         else: return -2
             
     async def get_user_by_id(id:str):
@@ -57,17 +50,17 @@ class AccountDA():
             async for item in col_accounts.find():
                 if str(item['_id']) == id:
                     await col_accounts.update_one({"_id":ObjectId(id)},{"$set":{"password":auth_jwt.get_password_hash(new_password)}})
-                    return 1
+                    return {"success" :  1}
         except:
-            return -1
+            return {"success" :  -1}
         
     async def delete(id:str):
         try: 
             account = await col_accounts.find_one({"_id": ObjectId(id)})
             if account:
                 await col_accounts.delete_one({"_id":ObjectId(id)})
-                return 1
+                return {"success" :  1}
         except:
-            return -1
+            return {"success" :  -1}
         
     

@@ -1,3 +1,6 @@
+from h11 import Data
+
+
 class DataHelper:
     def account_convert(account) -> dict:
         return {
@@ -24,4 +27,33 @@ class DataHelper:
             "numberOfPeople": room['numberOfPeople'],
             "checkIn": room['checkIn'],
             "checkOut":room['checkOut']
+        }
+    
+    def image_convert(image) -> dict:
+        return {
+            "url": image['url'],
+            "name": image['name'],
+        }
+        
+    def post_convert(post) -> dict:
+        list = []
+        for item in post['image']:
+            list.append(item)
+            
+        return {
+            "id": str(post['_id']),
+            "content": post['content'],
+            "createAt": post['createAt'],
+            "likeCount": post['likeCount'],
+            "idComment": post['idComment'],
+            "image": list                
+        }
+        
+    def comment_convert(comment)-> dict:
+        return {
+            "id": str(comment['_id']),
+            "idAccount": comment['idAccount'],
+            "content": comment['content'],
+            "likeCount" : comment['likeCount']
+            
         }

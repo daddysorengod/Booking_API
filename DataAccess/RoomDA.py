@@ -1,4 +1,3 @@
-from colorama import reinit
 from env.DatabaseConfig import db
 from Helper.DataHelper import DataHelper
 from Models.Room import Room
@@ -16,9 +15,9 @@ class RoomDA:
     async def create_room(room: Room):
         try:
             await col_room.insert_one(room.dict())
-            return 1
+            return {"success" :  1}
         except: 
-            return -1
+            return {"success" :  -1}
         
     async def update_room_state(roomCode:str, state:str):
         try: 
@@ -27,8 +26,8 @@ class RoomDA:
                     "state":state
                 }
             })
-            return 1
-        except: return -1
+            return {"success" :  1}
+        except: return {"success" :  -1}
         
     async def update_room_check_in(roomCode:str, checkIn:str):
         try: 
@@ -37,8 +36,8 @@ class RoomDA:
                     "checkIn":checkIn
                 }
             })
-            return 1
-        except: return -1
+            return {"success" :  1}
+        except: return {"success" :  -1}
         
     async def update_room_check_out(roomCode:str, checkOut:str):
         try: 
@@ -47,8 +46,8 @@ class RoomDA:
                     "checkOut":checkOut
                 }
             })
-            return 1
-        except: return -1
+            return {"success" :  1}
+        except: return {"success" :  -1}
         
     async def update_room_price(roomCode:str ,price:str):
         try: 
@@ -57,11 +56,11 @@ class RoomDA:
                     "price":price
                 }
             })
-            return 1
-        except: return -1
+            return {"success" :  1}
+        except: return {"success" :  -1}
         
     async def delete_room(id:str):
         try: 
             await col_room.delete_one({"_id":ObjectId(id)})
-            return 1
-        except: return -1
+            return {"success" :  1}
+        except: return {"success" :  -1}
