@@ -28,8 +28,8 @@ class PostDA:
         return rs
             
     async def get_get_post_by_id(id:str):
-        rep = await col_post.find_one({'_id':ObjectId(id)})        
-        return DataHelper.post_convert(rep)
+        res = await col_post.find_one({'_id':ObjectId(id)})        
+        return DataHelper.post_convert(res)
     
     async def delete_post(id:str):
         try:

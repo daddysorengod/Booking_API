@@ -26,8 +26,8 @@ class CommentDA:
         except: return {"success" :  -1}
         
     async def get_comment_by_id(id:str):
-        rep = await col_comment.find_one({'_id':ObjectId(id)})
-        return DataHelper.comment_convert(rep)
+        res = await col_comment.find_one({'_id':ObjectId(id)})
+        return DataHelper.comment_convert(res)
     
     async def get_comment_by_id_post(id:str):
         rs = []

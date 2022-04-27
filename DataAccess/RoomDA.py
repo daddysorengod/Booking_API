@@ -14,6 +14,7 @@ class RoomDA:
 
     async def create_room(room: Room):
         try:
+            room.state = "avalible"
             await col_room.insert_one(room.dict())
             return {"success" :  1}
         except: 
@@ -29,25 +30,29 @@ class RoomDA:
             return {"success" :  1}
         except: return {"success" :  -1}
         
-    async def update_room_check_in(roomCode:str, checkIn:str):
-        try: 
-            await col_room.update_one({"roomCode":roomCode},{
-                "$set":{
-                    "checkIn":checkIn
-                }
-            })
-            return {"success" :  1}
-        except: return {"success" :  -1}
+    async def get_room_by_id(id:str):
+        res = await col_room.find_one({"_id":ObjectId(id)})
+        return DataHelper.room_convert(res)
         
-    async def update_room_check_out(roomCode:str, checkOut:str):
-        try: 
-            await col_room.update_one({"roomCode":roomCode},{
-                "$set":{
-                    "checkOut":checkOut
-                }
-            })
-            return {"success" :  1}
-        except: return {"success" :  -1}
+    # async def update_room_check_in(roomCode:str, checkIn:str):
+    #     try: 
+    #         await col_room.update_one({"roomCode":roomCode},{
+    #             "$set":{
+    #                 "checkIn":checkIn
+    #             }
+    #         })
+    #         return {"success" :  1}
+    #     except: return {"success" :  -1}
+        
+    # async def update_room_check_out(roomCode:str, checkOut:str):
+    #     try: 
+    #         await col_room.update_one({"roomCode":roomCode},{
+    #             "$set":{
+    #                 "checkOut":checkOut
+    #             }
+    #         })
+    #         return {"success" :  1}
+    #     except: return {"success" :  -1}
         
     async def update_room_price(roomCode:str ,price:str):
         try: 

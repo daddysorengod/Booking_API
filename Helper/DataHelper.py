@@ -1,6 +1,3 @@
-from h11 import Data
-
-
 class DataHelper:
     def account_convert(account) -> dict:
         return {
@@ -18,6 +15,10 @@ class DataHelper:
 
     
     def room_convert(room) -> dict:
+        list = []
+        for item in room['image']:
+            list.append(item)
+            
         return {
             "id": str(room['_id']),
             "roomCode": room['roomCode'],
@@ -25,15 +26,15 @@ class DataHelper:
             "state": room['state'],
             "price": room['price'],
             "numberOfPeople": room['numberOfPeople'],
-            "checkIn": room['checkIn'],
-            "checkOut":room['checkOut']
+            "hotelId":room['hotelId'],
+            "image":list
         }
     
-    def image_convert(image) -> dict:
-        return {
-            "url": image['url'],
-            "name": image['name'],
-        }
+    # def image_convert(image) -> dict:
+    #     return {
+    #         "url": image['url'],
+    #         "name": image['name'],
+    #     }
         
     def post_convert(post) -> dict:
         list = []
@@ -56,4 +57,39 @@ class DataHelper:
             "content": comment['content'],
             "likeCount" : comment['likeCount']
             
+        }
+        
+    def hotel_convert(hotel) -> dict:
+        list = []
+        for item in hotel['image']:
+            list.append(item)
+        return {
+            "id": str(hotel['_id']),
+            "nameHotel": hotel['nameHotel'],
+            "star": hotel['star'],
+            "location": hotel['location'],
+            "description": hotel['description'],
+            "image":list
+        }
+    
+    def detail_convert(detail) -> dict:
+        list = []
+        for item in detail['room']:
+            list.append(item)
+        return {
+            "id": str(detail['_id']),
+            "account": detail['account'],
+            "room": list,
+            "checkIn": detail['checkIn'],
+            "staying": detail['staying'],
+            "state": detail['state'],
+            "totalPrice":detail['totalPrice']
+        }
+    
+    def history_convert(history) -> dict:
+        return {
+            "id": str(history['_id']),
+            "room": history['room'],
+            "checkIn": history['checkIn'],
+            "checkOut": history['checkOut']
         }

@@ -2,15 +2,16 @@ from typing import Optional
 from pydantic import BaseModel
 
 class Account(BaseModel):
-    username : str
-    password : str
-    name : str
-    email : str
+    _id : Optional[str] = None
+    username : Optional[str] = None
+    password : Optional[str] = None
+    name : Optional[str] = None
+    email : Optional[str] = None
     sex : Optional[str] = None
-    address : str
-    national : str 
+    address : Optional[str] = None
+    national : Optional[str] = None
     avatar : Optional[str] = None
-    createAt : str
+    createAt : Optional[str] = None
     hotelId: Optional[str] = None
     token: Optional[str] = None
-    role : str
+    role : Optional[str] = None

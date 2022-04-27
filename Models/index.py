@@ -4,3 +4,6 @@ from Models.Post import Post
 from Models.Room import Room
 from Models.Vourcher import Vourcher 
 from Models.Login import Login
+from Models.Hotel import Hotel
+from Models.HistoryBooking import HistoryBooking
+from Models.BookingDetail import BookingDetail

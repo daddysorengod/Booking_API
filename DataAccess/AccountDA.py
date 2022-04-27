@@ -41,8 +41,8 @@ class AccountDA():
         else: return -2
             
     async def get_user_by_id(id:str):
-        rep = await col_accounts.find_one({"_id":ObjectId(id)})
-        return DataHelper.account_convert(rep)
+        res = await col_accounts.find_one({"_id":ObjectId(id)})
+        return DataHelper.account_convert(res)
     
     
     async def update_password(id:int,new_password: str):
