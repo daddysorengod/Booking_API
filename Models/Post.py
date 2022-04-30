@@ -4,6 +4,7 @@ from Models.Image import Image
 
 class Post(BaseModel):
     _id : Optional[str] = None
+    idHotel: Optional[str] = None
     title : Optional[str] = None
     content : Optional[str] = None 
     createAt : Optional[str] = None 
@@ -11,4 +12,3 @@ class Post(BaseModel):
     idComment : Optional[str] = None 
     image: List[Image] = None
     
-    # comments : List[Comment] 
