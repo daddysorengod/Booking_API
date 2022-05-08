@@ -13,24 +13,23 @@ jwt_auth = AuthHandler()
 @login_rt.post("/api/login-gen-token")
 async def Login_Gen_Token(account:Login):
     rs = await col_account.find_one({"username":account.username})
-    if rs:
-        if jwt_auth.verify_password(account.password, rs['password']):
-            token = jwt_auth.encode_token(str(rs['_id']))
-            send_mail(rs['email'],token)
-            query = {"username":account.username}
-            value = {"$set":{"token":token}}
-            col_account.update_one(query, value)
-            return {
-                "token": token
-            }
-        else: return -1
+    if rs and jwt_auth.verify_password(account.password, rs['password']):
+        token = jwt_auth.encode_token(str(rs['_id']))
+        send_mail(rs['email'],token)
+        query = {"username":account.username}
+        value = {"$set":{"token":token}}
+        col_account.update_one(query, value)
+        return {
+            "token": token
+        }
+    else: return {"success": -1}
         
-@login_rt.get("/api/login-verify-token")
-async def Login_Verify_Token(token:str = Form(...)):
+@login_rt.get("/api/login-verify-token/{token}")
+async def Login_Verify_Token(token:str):
     rs = await col_account.find_one({"token":token})
     if rs:
         query = {"token":token}
         value = {"$set":{"token":""}}
         await col_account.update_one(query, value)
         return DataHelper.account_convert(rs)
-    else: return -1 
+    else: return { "success": -1 } 
