@@ -8,7 +8,7 @@ if defined _OLD_CODEPAGE (
     "%SystemRoot%\System32\chcp.com" 65001 > nul
 )
 
-set VIRTUAL_ENV=D:\IT\Project\booking_api\env
+set VIRTUAL_ENV=D:\IT\project\booking_api\env
 
 if not defined PROMPT set PROMPT=$P$G
 
